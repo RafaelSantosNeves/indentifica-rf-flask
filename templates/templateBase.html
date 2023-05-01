@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}</title>
+    {% block css %}{% endblock %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/header.css')}}">
+</head>
+<body>
+    <header class="hdPrincipal">
+
+        <div class="hdLogo">
+            <img src="{{ url_for('static', filename='img/logo.png')}}" alt="" class="imgLogo">
+            <h2 class="h2Logo">RECONHECE <br> DEV</h2>
+        </div>
+        <div class="hdRedes">
+            <a href="">
+                <img src="{{ url_for('static', filename='img/facebook.png')}}" alt="" class="imgRedes">
+            </a>
+            <a href="">
+                <img src="{{ url_for('static', filename='img/github.png')}}" alt="" class="imgRedes">
+            </a>
+            <a href="">
+                <img src="{{ url_for('static', filename='img/instagram.png')}}" alt="" class="imgRedes">
+            </a>
+            <a href="">
+                <img src="{{ url_for('static', filename='img/linkedin.png')}}" alt="" class="imgRedes">
+            </a>
+        </div>
+
+    </header>
+    <nav class="navPrincipal">
+        <a href="/login">Cadastro</a>
+        <a href="/index">Pagina Principal</a>
+        <a href="/presenca">Lista de Presença</a>
+    </nav>
+    {% block body %}{% endblock %}
+</body>
+</html>

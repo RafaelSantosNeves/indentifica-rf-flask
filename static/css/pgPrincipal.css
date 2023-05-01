@@ -1,0 +1,29 @@
+.sctReconhece{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.artVidio{
+    width: 500px;
+    border-radius: 50000000000px;
+    margin-top: 30px;
+}
+
+.imgVidio{
+    width: 500px;
+    border: 5px solid #9bb315;
+    border-radius: 500000000000px;
+}
+
+.artNome{
+    width: 400px;
+    color: white;
+    background-color: #F00E00;
+    border-radius: 52222222222px;
+    display: flex;
+    justify-content: center;
+    margin-left: 18px;
+    margin-top: 30px;
+}

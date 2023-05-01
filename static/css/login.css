@@ -1,0 +1,116 @@
+.artCadastro{
+    background-color: #302A73;
+    height: 70vh;
+    width: 70vw;
+    border-radius: 20px;
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    color: aliceblue;
+    
+}
+
+.mnContender{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.divInput{
+    display: flex;
+    margin-bottom: 5vh;
+    align-items: center;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    height: 50vh;
+    color: aliceblue;
+    flex-shrink: 0; /* impede que o botão encolha */
+}
+
+#btEnviar{
+    position: relative;
+    margin-top: 20vh;
+    width: 30px;
+    height: 30px;
+    border-radius: 55000px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#h1Titulo{
+    margin-bottom: 10vh;
+    font-family: 'Lato  ', sans-serif;
+    font-weight: 100;
+    font-size: 30px;
+}
+
+.formInput{
+    all: unset;
+    background-color: rgb(226, 226, 226);
+    border-radius: 20000px;
+    font-size: 20px;
+    padding: 5px;
+    padding-left: 15px;
+    height: 37%;
+    color: black;
+}
+
+.lbInput{
+    font-size: 200%;
+}
+
+.spEnviar{
+    margin-left: -4px;
+}
+
+.divGrid{
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-areas: 
+    "lbCpf inpCpf"
+    "lbNome inpNome";
+}
+
+#lbCpf{
+    grid-area: lbCpf;
+}
+
+#inpCpf{
+    grid-area: inpCpf;
+}
+
+#lbNome{
+    grid-area: lbNome;
+}
+
+#inpNome{
+    grid-area: inpNome;
+}
+
+#data{
+    width: 10px;
+    all: unset;
+    background-color: rgb(226, 226, 226);
+    border-radius: 20000px;
+    padding: 5px;
+    padding-left: 10px;
+    color: black;
+    height: 20px;
+}
+
+.divInputData{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.margem_alerta{
+    margin-top: 16px;
+}

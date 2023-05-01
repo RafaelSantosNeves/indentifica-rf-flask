@@ -1,0 +1,52 @@
+body{
+    margin: 0;
+    padding: 0;
+    font-family: 'Lato  ', sans-serif;
+    font-weight: 300;
+}
+
+.hdPrincipal{
+    display: flex;
+    background-color: #2C87F0;
+    height: 15vh;
+    margin: 0;
+    padding: 0;
+    justify-content: space-between;
+}
+
+.navPrincipal{
+    background-color: #9bb315;
+    display: flex;
+    font-size: 2.5vh;
+}
+
+.navPrincipal a {
+    padding: 5px 10px 5px 10px;
+    text-decoration: none;
+    color: #ffffff;
+}
+
+.imgLogo{
+    height: 15vh;
+}
+
+.imgRedes{
+    height: 7.5vh;
+    filter: invert(100%);
+
+}
+
+.hdRedes a{
+    margin: 10px 0px 0px 10px;
+
+}
+
+.hdLogo{
+    display: flex;
+    flex-direction: row;
+    color: aliceblue;
+}
+
+.h2Logo{
+    font-size: 4vh;
+}
