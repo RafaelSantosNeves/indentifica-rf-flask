@@ -89,6 +89,20 @@ def id_usuario(nome):
     id = cursor.fetchone()
     return id
 
+def escolha_data(data):
+    conexao = mysql.connector.connect(
+        host='localhost',
+        user='root',
+        password='root',
+        database='projetotcc'
+    )
+    cursor = conexao.cursor()
+    comando = f"SELECT data FROM data WHERE data = '{data}'"
+    cursor.execute(comando)
+    resustadoData = cursor.fetchone()
+    return resustadoData[0]
+
+
 def imagemUser(posicao: int):
     conexao = mysql.connector.connect(
         host='localhost',
@@ -121,7 +135,6 @@ def nomeUser(posicao: int):
     cursor.execute(comando)
     nome = cursor.fetchone()
     return nome
-print(nomeUser(0)[1])
 
 
 def quantidadeUser():
@@ -153,3 +166,5 @@ def quantidadepresenca(data):
     cursor.close()
     conexao.close()
     return int(num_rows)
+
+print(checar(20230513))

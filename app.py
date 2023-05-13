@@ -14,8 +14,6 @@ app.config['UPLOAD_FOLDER'] = 'static/imguser'
 from flask import render_template
 from flask import request
 from flask import redirect
-import cv2
-import face_recognition
 from baseBd import quantidadeUser
 from baseBd import nomeUser
 from baseBd import imagemUser
@@ -23,6 +21,8 @@ from indentificar import gen_frames
 from baseBd import cadastroUser
 from baseBd import checar
 from baseBd import quantidadepresenca
+
+video = Response(gen_frames(), mimetype='multipart/x-mixed-replace; boundary=frame')
 
 
 #cria url e renderiza template html
@@ -34,30 +34,36 @@ def index():
 #executa a função gen_frames e renderiza mandando para o arquibo pgPrincipal.html
 @app.route('/video_feed')
 def video_feed():
-    return Response(gen_frames(), mimetype='multipart/x-mixed-replace; boundary=frame')
+    return video
 
-@app.route('/login')
-def login():
+@app.route('/cadastro')
+def cadastro():
     primeiro_cadastro = True
-    return render_template('login.html', primeiro_cadastro=primeiro_cadastro)
+    return render_template('cadastro.html', primeiro_cadastro=primeiro_cadastro)
 
 @app.route('/presenca')
 def presenca():
     nome = []
-    for i in range(quantidadepresenca(datetime.date.today().strftime("%Y%m%d"))):
-        print(i)
+    for i in range(quantidadepresenca(datetime.date.today())):
         # for e in range(2):
-        nome.append(checar(datetime.date.today().strftime("%Y%m%d"))[i][0])
-    print(nome)
+        nome.append(checar(datetime.date.today())[i][0])
     return render_template('presenca.html', nome=nome)
 
+@app.route('/escolha_data')
+def escolha_data():
+    return render_template('escolha_data.html')
 
-# # Converter a data para uma string no formato "20230428"
-# data_atual_str = data_atual.strftime("%Y%m%d")
-# print(checar(data_atual_str))
+
+@app.route('/escolha_data', methods=['POST'] )
+def escolha_dataForm():
+    data = request.form.get('escolha_data')
+    nome = []
+    for i in range(quantidadepresenca(data)):
+        nome.append(checar(data)[i][0])
+    return render_template('presenca.html', nome=nome)
 
 @app.route('/cadastro', methods=['POST'])
-def cadastro():
+def cadastroForm():
     primeiro_cadastro = False
     nome = request.form.get('nome')
     cpf = request.form.get('cpf')
@@ -67,7 +73,7 @@ def cadastro():
     caminho_imagem = os.path.join(app.config['UPLOAD_FOLDER'], imagem.filename)
     imagem.save(caminho_imagem)
     retorno = cadastroUser(nome, cpf, data_nascimento, caminho_imagem)
-    return render_template('login.html', retorno=retorno)
+    return render_template('cadastro.html', retorno=retorno)
 
 if __name__=='__main__':
     app.run(debug=True)

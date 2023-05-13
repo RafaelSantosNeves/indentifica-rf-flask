@@ -1,0 +1,37 @@
+{% extends "templateBase.html" %}
+{% block title %} Presença {% endblock %}
+{% block css %}
+    <link rel="stylesheet" href="../static/css/escolhaData.css">
+{% endblock %}
+{% block body %}
+<main class="mnContender">
+    <article class="artCadastro">
+        <a href="/presenca" class="button">
+            <div class="box">E</div>
+            <div class="box">S</div>
+            <div class="box">C</div>
+            <div class="box">O</div>
+            <div class="box">L</div>
+            <div class="box">H</div>
+            <div class="box">A</div>
+            <div class="box"></div>
+            <div class="box">D</div>
+            <div class="box">A</div>
+            <div class="box">T</div>
+            <div class="box">A</div>
+            <div class="box">!</div>
+        </a>
+        <form class="form" method="POST" action="/escolha_data" enctype="multipart/form-data">
+            <div class="divInputData">
+                <label class="lbInput" para="nome">Data de Presença:</label>
+                <input  id="data" type="date" name="escolha_data">
+            </div>
+
+            <button type="submit">
+                <span>Encontre!</span>
+            </button>
+        </form>
+
+    </article>
+</main>
+{% endblock %}
