@@ -24,6 +24,8 @@ from baseBd import quantidadepresenca
 from baseBd import usuario
 from baseBd import presencaUser
 from baseBd import quantidadePresencaUser
+from baseBd import id_usuario
+from baseBd import deletarUsuario
 
 video = Response(gen_frames(), mimetype='multipart/x-mixed-replace; boundary=frame')
 
@@ -54,12 +56,23 @@ def presenca():
 
 @app.route('/usuarios')
 def usuarios():
-    usuarios = []
-    campos = 2
-    for i in range(quantidadeUser()):
-        print(usuario()[i])
-        usuarios.append(usuario()[i])
-    return render_template('usuarios.html', usuarios=usuarios, campos=campos)
+    url = True
+    usuarios = usuario()
+    return render_template('usuarios.html', usuarios=usuarios, url=url, userDeletado=url )
+
+@app.route('/usuarioDeletado', methods=['GET'])
+def usuariosForm():
+    url = False
+    nome = request.args.get('excluir')
+    print(nome)
+    # id = id_usuario(nome)
+    print(id_usuario(nome))
+    # print(id)
+    deletarUsuario(id_usuario(nome))
+    userDeletado = True
+    usuarios = usuario()
+    # print(usuarios)
+    return render_template('usuarios.html', usuarios=usuarios, userDeletado=userDeletado, url=url)
 
 @app.route('/presencaUser', methods=['GET'])
 def presencaUsers():

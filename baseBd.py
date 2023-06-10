@@ -56,16 +56,19 @@ def quantidadePresencaUser(nome):
 def id_usuario(nome):
     comando = f"SELECT id FROM alunos_cadastrados WHERE nome = '{nome}' AND ativo = 1"
     id = conectaBDretorno(comando)
-    return id
+    return id[0]
 
-def deletarUsuario(cpf):
-    comando = f"UPDATE alunos_cadastrados SET ativo = 0 WHERE cpf = '{cpf}' AND ativo = 1"
+# print(id_usuario("Dirce Mendes"))
+
+def deletarUsuario(id):
+    comando = f"UPDATE alunos_cadastrados SET ativo = 0 WHERE id = '{id}'"
     conectaBD(comando)
+
+# deletarUsuario(id_usuario("Dirce Mendes"))
 
 def usuario():
     comando = f"SELECT nome, cpf, data_nascimento FROM alunos_cadastrados WHERE ativo = 1"
-    id = []
-    id.append(conectaBDretorno(comando))
+    id = conectaBDAll(comando)
     return id
 
 def imagemUser(posicao: int):
