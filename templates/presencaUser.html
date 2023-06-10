@@ -1,0 +1,33 @@
+{% extends "templateBase.html" %}
+{% block title %} Presença {% endblock %}
+{% block css %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/presencaUser.css')}}">
+{% endblock %}
+{% block body %}
+    <main class="mnContender">
+        <article class="artCadastro">
+            <a href="/usuarios" class="button">
+                <div class="box">U</div>
+                <div class="box">S</div>
+                <div class="box">U</div>
+                <div class="box">Á</div>
+                <div class="box">R</div>
+                <div class="box">I</div>
+                <div class="box">O</div>
+                <div class="box">S</div>
+            </a>
+
+            <table class="tbDados">
+                <tr>
+                    <th>{{ nome }} esteve nos dias</th>
+                </tr>
+                {% for item in data %}
+                    <tr>
+                        <th>{{item}}</th>
+                    </tr>
+                {% endfor %}
+            </table>
+
+        </article>
+    </main>
+{% endblock %}

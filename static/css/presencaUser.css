@@ -1,0 +1,136 @@
+.material-symbols-outlined {
+    font-variation-settings:
+    'FILL' 0,
+    'wght' 500,
+    'GRAD' 0,
+    'opsz' 48
+  }
+  
+  .artCadastro{
+      background: #2C87F0;
+      min-height: 500px;
+      width: 70vw;
+      border-radius: 20px;
+      margin-top: 10px;
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      color: aliceblue;
+      min-width: 900px;
+      margin-bottom: 30px;
+  }
+    
+  .box {
+      width: 35px;
+      height: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 15px;
+      font-weight: 700;
+      color: #fff;
+      transition: all .8s;
+      cursor: pointer;
+      position: relative;
+      background: #2C87F0;
+      overflow: hidden;
+      
+  }
+    
+  .box:before {
+      content: "W";
+      position: absolute;
+      top: 0;
+      background: #0f0f0f;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transform: translateY(100%);
+      transition: transform .4s;
+  }
+  
+  .box:nth-child(1)::before {
+      transform: translateY(100%);
+      content: 'U';
+  }
+  
+  .box:nth-child(2)::before {
+      transform: translateY(-100%);
+      content: 'S';
+  }
+    
+  .box:nth-child(3)::before {
+      content: 'U';
+  }
+    
+  .box:nth-child(4)::before {
+      transform: translateY(-100%);
+      content: 'Á';
+  }
+    
+  .box:nth-child(5)::before {
+      content: 'R';
+  }
+  
+  .box:nth-child(6)::before {
+      transform: translateY(-100%);
+      content: 'I';
+  }
+    
+  .box:nth-child(7)::before {
+      content: 'O';
+  }
+    
+  .box:nth-child(8)::before {
+      transform: translateY(-100%);
+      content: 'S';
+  }
+  
+    
+  .button:hover .box:before {
+      transform: translateY(0);
+  }
+  
+  .divInputData{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+      min-weight: 525px;
+  }
+  
+  .mnContender{
+      display: flex;
+      justify-content: center;
+  }
+  
+  .button {
+      display: flex;
+      margin: 30px;
+  }
+  
+  table, th, td {
+      border: 2px solid rgb(255, 255, 255);
+      border-collapse: collapse;
+      border-spacing: 50px;
+      padding: 5px 1px 5px 1px;
+      text-align: center;
+  }
+  
+  th{
+      color: #FFF;
+  }
+  
+  
+  .tbDados{
+      width: 90%;
+      font-size: 20px;
+      color: whitre;
+  }
+  
+  a{
+      color: #FFF;
+  }
+

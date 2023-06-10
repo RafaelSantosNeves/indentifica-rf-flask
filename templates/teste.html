@@ -5,31 +5,36 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="../static/css/presenca.css">
-
+    
+    <link rel="stylesheet" href="../static/css/header.css">
+    <link rel="stylesheet" href="../static/css/presencaUser.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
 </head>
 <body>
+
     <main class="mnContender">
         <article class="artCadastro">
-            <a href="" class="button">
-                <div class="box">P</div>
-                <div class="box">R</div>
-                <div class="box">E</div>
+            <a href="/escolha_data" class="button">
+                <div class="box">U</div>
                 <div class="box">S</div>
-                <div class="box">E</div>
-                <div class="box">N</div>
-                <div class="box">T</div>
-                <div class="box">E</div>
-                <div class="box"></div>
-                <div class="box">H</div>
+                <div class="box">U</div>
+                <div class="box">Á</div>
+                <div class="box">R</div>
+                <div class="box">I</div>
                 <div class="box">O</div>
-                <div class="box">J</div>
-                <div class="box">E</div>
+                <div class="box">S</div>
             </a>
+
             <table class="tbDados">
                 <tr>
-                    <th>5555</th>
+                    <th>{{ nome }} esteve nos dias</th>
                 </tr>
+                {% for presenca in usuarios %}
+                    <tr>
+                        <td>{{presenca}}</td>
+                    </tr>
+                {% endfor %}
             </table>
 
         </article>

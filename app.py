@@ -21,6 +21,9 @@ from indentificar import gen_frames
 from baseBd import cadastroUser
 from baseBd import checar
 from baseBd import quantidadepresenca
+from baseBd import usuario
+from baseBd import presencaUser
+from baseBd import quantidadePresencaUser
 
 video = Response(gen_frames(), mimetype='multipart/x-mixed-replace; boundary=frame')
 
@@ -48,6 +51,32 @@ def presenca():
         # for e in range(2):
         nome.append(checar(datetime.date.today())[i][0])
     return render_template('presenca.html', nome=nome)
+
+@app.route('/usuarios')
+def usuarios():
+    usuarios = []
+    campos = 2
+    for i in range(quantidadeUser()):
+        print(usuario()[i])
+        usuarios.append(usuario()[i])
+    return render_template('usuarios.html', usuarios=usuarios, campos=campos)
+
+@app.route('/presencaUser', methods=['GET'])
+def presencaUsers():
+    nome = request.args.get('nome')
+    data = []
+    resultados = presencaUser(nome)
+    #faz com que as informaçoes saiam bunitinhas
+    #de 2023-05-13
+    #para 13/05/2023
+    for result in resultados:
+        date_obj = result[0]
+        date_str = date_obj.strftime('%d/%m/%Y')
+        data.append(date_str)
+
+    return render_template('presencaUser.html', nome=nome, data=data)
+
+
 
 @app.route('/escolha_data')
 def escolha_data():

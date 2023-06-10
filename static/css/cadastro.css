@@ -1,6 +1,6 @@
 .artCadastro{
     background-color: #302A73;
-    height: 70vh;
+    min-height: 70vh;
     width: 70vw;
     border-radius: 20px;
     margin-top: 10px;
@@ -27,19 +27,10 @@
 form{
     display: flex;
     flex-direction: column;
-    height: 50vh;
+    min-height: 50vh;
     color: aliceblue;
     flex-shrink: 0; /* impede que o botão encolha */
-}
-
-#btEnviar{
-    position: relative;
-    margin-top: 20vh;
-    width: 30px;
-    height: 30px;
-    border-radius: 55000px;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    align-items: center;
 }
 
 #h1Titulo{
@@ -114,3 +105,47 @@ form{
 .margem_alerta{
     margin-top: 16px;
 }
+
+
+
+
+button {
+    display: inline-block;
+    border-radius: 4px;
+    background-color: #3d405b;
+    border: none;
+    color: #FFFFFF;
+    text-align: center;
+    font-size: 17px;
+    padding: 16px;
+    width: 130px;
+    transition: all 0.5s;
+    cursor: pointer;
+    margin: 30px;
+}
+
+button span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+}
+
+button span:after {
+    content: '»';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -15px;
+    transition: 0.5s;
+}
+
+button:hover span {
+    padding-right: 15px;
+}
+
+button:hover span:after {
+    opacity: 1;
+    right: 0;
+}
+
