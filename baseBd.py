@@ -98,7 +98,7 @@ def imagemUser(posicao: int):
         database='projetotcc'
     )
     cursor = conexao.cursor()
-    comando = f'SELECT foto_aluno FROM alunos_cadastrados LIMIT 1 OFFSET {posicao}'
+    comando = f'SELECT foto_aluno FROM alunos_cadastrados WHERE ativo = 1 LIMIT 1 OFFSET {posicao}'
     cursor.execute(comando)
     imagemDocumento = cursor.fetchone()
     decodificaString = base64.b64decode(imagemDocumento[0])
@@ -108,6 +108,22 @@ def imagemUser(posicao: int):
     cursor.close()
     conexao.close()
     return imagemFinal
+
+
+def imagemUserAtivo(posicao: int):
+    conexao = mysql.connector.connect(
+        host='localhost',
+        user='root',
+        password='root',
+        database='projetotcc'
+    )
+    cursor = conexao.cursor()
+    comando = f'SELECT foto_aluno, nome FROM alunos_cadastrados WHERE ativo = 1 LIMIT 1 OFFSET {posicao}'
+    cursor.execute(comando)
+    imagemDocumento = cursor.fetchone()
+    cursor.close()
+    conexao.close()
+    return imagemDocumento
 
 
 def nomeUser(posicao: int):

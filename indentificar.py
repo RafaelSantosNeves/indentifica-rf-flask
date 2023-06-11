@@ -7,6 +7,7 @@ import mysql.connector
 from baseBd import id_usuario
 import datetime
 from baseBd import presenca
+from baseBd import imagemUserAtivo
 
 
 def nomeUser(posicao: int):
@@ -17,7 +18,7 @@ def nomeUser(posicao: int):
         database='projetotcc'
     )
     cursor = conexao.cursor()
-    comando = f'SELECT nome FROM alunos_cadastrados LIMIT 1 OFFSET {posicao}'
+    comando = f'SELECT nome FROM alunos_cadastrados WHERE ativo = 1 LIMIT 1 OFFSET {posicao}'
     cursor.execute(comando)
     nome = cursor.fetchone()
     return nome
@@ -33,8 +34,9 @@ def gen_frames():
     for i in range(quantidadeUser()):
 
         # Armazene as codificações de rosto de todas as imagens conhecidas
-        known_face_encodings.append(imagemUser(i))
-        known_face_names.append(nomeUser(i)[0])
+        if imagemUserAtivo(i) != None:
+            known_face_encodings.append(imagemUser(i))
+            known_face_names.append(nomeUser(i)[0])
 
     # def pode_executar():
     #     # Verifica se a hora atual está entre 1:30 pm e 5:00 pm
@@ -77,7 +79,7 @@ def gen_frames():
 
             # Se o rosto corresponder a um rosto conhecido
             if True in matches:
-                if first_match_index == matches.index(True) - 1:
+                if first_match_index == matches.index(True):
                     # Incrementa o contador de reconhecimento
                     count += 1
                 else:
@@ -93,7 +95,7 @@ def gen_frames():
                     presentes.append(known_face_names[first_match_index])
 
                 #pega a posição que esta a nos arrey knowns que esta sendo indentificado na tela
-                first_match_index = matches.index(True) -1
+                first_match_index = matches.index(True)
                 name = known_face_names[first_match_index]
                 print(known_face_names[first_match_index])
 
