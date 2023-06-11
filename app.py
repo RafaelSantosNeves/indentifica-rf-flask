@@ -58,21 +58,14 @@ def presenca():
 def usuarios():
     url = True
     usuarios = usuario()
-    return render_template('usuarios.html', usuarios=usuarios, url=url, userDeletado=url)
+    return render_template('usuarios.html', usuarios=usuarios, url=url)
 
 @app.route('/usuarioDeletado', methods=['GET'])
 def usuariosForm():
-    url = False
-    nome = request.args.get('excluir')
-    print(nome)
-    # id = id_usuario(nome)
-    print(id_usuario(nome))
-    # print(id)
-    deletarUsuario(id_usuario(nome))
-    userDeletado = True
+    id = request.args.get('excluir')
+    userDeletado = deletarUsuario(id)
     usuarios = usuario()
-    # print(usuarios)
-    return render_template('usuarios.html', usuarios=usuarios, userDeletado=userDeletado, url=url)
+    return render_template('usuarios.html', usuarios=usuarios, userDeletado=userDeletado)
 
 @app.route('/presencaUser', methods=['GET'])
 def presencaUsers():

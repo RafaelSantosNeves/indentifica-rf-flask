@@ -68,6 +68,7 @@
                         <td>
                             <form action="/presencaUser" method="get">
                                 <input type="hidden" name="nome" value="{{item[0]}}">
+                                <input type="hidden" name="id" value="{{item[3]}}">
                                 <button type="submit">
                                     <span class="material-symbols-outlined">
                                         calendar_month
@@ -84,7 +85,7 @@
                         </td>
                         <td>
                             <form action="/usuarioDeletado" method="get">
-                                <input type="hidden" name="excluir" value="{{item[0]}}">
+                                <input type="hidden" name="excluir" value="{{item[3]}}">
                                 <button type="submit">
                                     <span class="material-symbols-outlined">
                                         delete_forever

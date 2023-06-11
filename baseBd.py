@@ -80,13 +80,18 @@ def id_usuario(nome):
 # print(id_usuario("Dirce Mendes"))
 
 def deletarUsuario(id):
-    comando = f"UPDATE alunos_cadastrados SET ativo = 0 WHERE id = '{id}'"
-    conectaBD(comando)
+    try:
+        comando = f"UPDATE alunos_cadastrados SET ativo = 0 WHERE id = '{id}'"
+        conectaBD(comando)
+        return True
+    except:
+        return False
+
 
 # deletarUsuario(id_usuario("Dirce Mendes"))
 
 def usuario():
-    comando = f"SELECT nome, cpf, data_nascimento FROM alunos_cadastrados WHERE ativo = 1"
+    comando = f"SELECT nome, cpf, data_nascimento, id FROM alunos_cadastrados WHERE ativo = 1"
     id = conectaBDAll(comando)
     return id
 
