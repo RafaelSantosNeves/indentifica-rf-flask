@@ -28,9 +28,20 @@ def cadastroUser(nome: str, cpf: str, data_nascimento: int, caminho_imagem):
         return False
 
 def presenca(data: int, id_aluno: int, presenca = 1):
+    conexao = mysql.connector.connect(
+        host='localhost',
+        user='root',
+        password='root',
+        database='projetotcc'
+    )
+    cursor = conexao.cursor()
+
     # Insere o registro no banco de dados
     comando = f'INSERT INTO data (data, id_aluno, presente) VALUES ("{data}", "{id_aluno}", "{presenca}")'
-    conectaBD(comando)
+    cursor.execute(comando)
+    conexao.commit()
+    cursor.close()
+    conexao.close()
 
 #essa parate do codigo em especifico n pode fazer parte da funcao pq o cursor dele é fetchall e n fetchone
 def checar(data):
@@ -54,9 +65,17 @@ def quantidadePresencaUser(nome):
 
 
 def id_usuario(nome):
-    comando = f"SELECT id FROM alunos_cadastrados WHERE nome = '{nome}' AND ativo = 1"
-    id = conectaBDretorno(comando)
-    return id[0]
+    conexao = mysql.connector.connect(
+        host='localhost',
+        user='root',
+        password='root',
+        database='projetotcc'
+    )
+    cursor = conexao.cursor()
+    comando = f"SELECT id FROM alunos_cadastrados WHERE nome = '{nome}'"
+    cursor.execute(comando)
+    id = cursor.fetchone()
+    return id
 
 # print(id_usuario("Dirce Mendes"))
 
@@ -72,22 +91,51 @@ def usuario():
     return id
 
 def imagemUser(posicao: int):
-    comando = f'SELECT foto_aluno FROM alunos_cadastrados WHERE ativo = 1 LIMIT 1 OFFSET {posicao}'
-    imagemDocumento = conectaBDretorno(comando)
+    conexao = mysql.connector.connect(
+        host='localhost',
+        user='root',
+        password='root',
+        database='projetotcc'
+    )
+    cursor = conexao.cursor()
+    comando = f'SELECT foto_aluno FROM alunos_cadastrados LIMIT 1 OFFSET {posicao}'
+    cursor.execute(comando)
+    imagemDocumento = cursor.fetchone()
     decodificaString = base64.b64decode(imagemDocumento[0])
     processoImagem = np.frombuffer(decodificaString, np.uint8)
     imagem = cv2.imdecode(processoImagem, cv2.IMREAD_COLOR)
     imagemFinal =face_recognition.face_encodings(imagem)[0]
+    cursor.close()
+    conexao.close()
     return imagemFinal
 
+
 def nomeUser(posicao: int):
-    comando = f'SELECT * FROM alunos_cadastrados WHERE ativo = 1 LIMIT 1 OFFSET {posicao} '
-    nome = conectaBDretorno(comando)
+    conexao = mysql.connector.connect(
+        host='localhost',
+        user='root',
+        password='root',
+        database='projetotcc'
+    )
+    cursor = conexao.cursor()
+    comando = f'SELECT nome FROM alunos_cadastrados LIMIT 1 OFFSET {posicao}'
+    cursor.execute(comando)
+    nome = cursor.fetchone()
     return nome
 
 def quantidadeUser():
-    comando = f'SELECT COUNT(*) FROM alunos_cadastrados WHERE ativo = 1'
-    num_rows = conectaBDretorno(comando)[0]
+    conexao = mysql.connector.connect(
+        host='localhost',
+        user='root',
+        password='root',
+        database='projetotcc'
+    )
+    cursor = conexao.cursor()
+    comando = f'SELECT COUNT(*) FROM alunos_cadastrados'
+    cursor.execute(comando)
+    num_rows = cursor.fetchone()[0]
+    cursor.close()
+    conexao.close()
     return num_rows
 
 def quantidadepresenca(data):
