@@ -64,7 +64,7 @@ def presenca(data: int, id_aluno: int, presenca = 1):
 #essa parate do codigo em especifico n pode fazer parte da funcao pq o cursor dele é fetchall e n fetchone
 def checar(data):
     #retorna o quem teve presente no dia que vc coloca na var data
-    comando = f"SELECT alunos_cadastrados.nome, data.data, data.presente FROM alunos_cadastrados LEFT JOIN data ON alunos_cadastrados.id = data.id_aluno AND data.data = '{data}' WHERE data.data IS NOT NULL"
+    comando = f"SELECT alunos_cadastrados.nome, data.data, data.presente FROM alunos_cadastrados LEFT JOIN data ON alunos_cadastrados.id = data.id_aluno AND data.data = '{data}' WHERE alunos_cadastrados.ativo = 1 AND data.data IS NOT NULL"
     resultados = conectaBDAll(comando)
     # Retornar os resultados
     return resultados
@@ -74,11 +74,6 @@ def presencaUser(nome):
     resultados = conectaBDAll(comando)
     return resultados
 
-def quantidadePresencaUser(nome):
-    comando = f"SELECT data.data FROM data LEFT JOIN alunos_cadastrados ON alunos_cadastrados.id = data.id_aluno WHERE alunos_cadastrados.nome = '{nome}' AND data.data IS NOT NULL"
-    resultados = conectaBDAll(comando)
-    quantidade = len(resultados)
-    return quantidade
 
 
 
@@ -177,7 +172,13 @@ def quantidadeUser():
     conexao.close()
     return num_rows
 
+def quantidadePresencaUser(nome):
+    comando = f"SELECT data.data FROM data LEFT JOIN alunos_cadastrados ON alunos_cadastrados.id = data.id_aluno WHERE alunos_cadastrados.ativo = 1 AND data.data IS NOT NULL"
+    resultados = conectaBDAll(comando)
+    quantidade = len(resultados)
+    return quantidade
+
 def quantidadepresenca(data):
-    comando = f'SELECT COUNT(*) FROM data WHERE data = "{data}"'
+    comando = f'SELECT COUNT(*) FROM data LEFT JOIN alunos_cadastrados ON alunos_cadastrados.id = data.id_aluno WHERE alunos_cadastrados.ativo = 1 AND data.data = "{data}" '
     num_rows = conectaBDretorno(comando)[0]
     return int(num_rows)

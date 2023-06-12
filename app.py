@@ -42,14 +42,6 @@ def index():
 def video_feed():
     return video
 
-@app.route('/presenca')
-def presenca():
-    nome = []
-    for i in range(quantidadepresenca(datetime.date.today())):
-        # for e in range(2):
-        nome.append(checar(datetime.date.today())[i][0])
-    return render_template('presenca.html', nome=nome)
-
 
 @app.route('/presencaUser', methods=['GET'])
 def presencaUsers():
@@ -66,7 +58,13 @@ def presencaUsers():
 
     return render_template('presencaUser.html', nome=nome, data=data)
 
-
+@app.route('/presenca')
+def presenca():
+    nome = []
+    for i in range(quantidadepresenca(datetime.date.today())):
+        # for e in range(2):
+        nome.append(checar(datetime.date.today())[i][0])
+    return render_template('presenca.html', nome=nome)
 
 @app.route('/escolha_data')
 def escolha_data():
