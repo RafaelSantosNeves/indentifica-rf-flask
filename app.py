@@ -26,6 +26,7 @@ from baseBd import presencaUser
 from baseBd import quantidadePresencaUser
 from baseBd import id_usuario
 from baseBd import deletarUsuario
+from baseBd import editUser
 
 video = Response(gen_frames(), mimetype='multipart/x-mixed-replace; boundary=frame')
 
@@ -41,11 +42,6 @@ def index():
 def video_feed():
     return video
 
-@app.route('/cadastro')
-def cadastro():
-    primeiro_cadastro = True
-    return render_template('cadastro.html', primeiro_cadastro=primeiro_cadastro)
-
 @app.route('/presenca')
 def presenca():
     nome = []
@@ -54,18 +50,6 @@ def presenca():
         nome.append(checar(datetime.date.today())[i][0])
     return render_template('presenca.html', nome=nome)
 
-@app.route('/usuarios')
-def usuarios():
-    url = True
-    usuarios = usuario()
-    return render_template('usuarios.html', usuarios=usuarios, url=url)
-
-@app.route('/usuarioDeletado', methods=['GET'])
-def usuariosForm():
-    id = request.args.get('excluir')
-    userDeletado = deletarUsuario(id)
-    usuarios = usuario()
-    return render_template('usuarios.html', usuarios=usuarios, userDeletado=userDeletado)
 
 @app.route('/presencaUser', methods=['GET'])
 def presencaUsers():
@@ -97,6 +81,11 @@ def escolha_dataForm():
         nome.append(checar(data)[i][0])
     return render_template('presenca.html', nome=nome)
 
+@app.route('/cadastro')
+def cadastro():
+    primeiro_cadastro = True
+    return render_template('cadastro.html', primeiro_cadastro=primeiro_cadastro)
+
 @app.route('/cadastro', methods=['POST'])
 def cadastroForm():
     primeiro_cadastro = False
@@ -109,6 +98,43 @@ def cadastroForm():
     imagem.save(caminho_imagem)
     retorno = cadastroUser(nome, cpf, data_nascimento, caminho_imagem)
     return render_template('cadastro.html', retorno=retorno)
+
+
+@app.route('/editUser', methods=['POST'])
+def editUserForm():
+    id = int(request.form.get("id"))
+    nome = request.form.get("nome")
+    cpf = request.form.get("cpf")
+    data = request.form.get("data")
+    return render_template('editUser.html', id=id, nome=nome, cpf=cpf, data=data)
+
+@app.route('/usuarioDeletado', methods=['GET'])
+def usuariosForm():
+    urlExclui = True
+    id = request.args.get('excluir')
+    userDeletado = deletarUsuario(id)
+    usuarios = usuario()
+    return render_template('usuarios.html', usuarios=usuarios, userDeletado=userDeletado, urlExclui=urlExclui)
+
+@app.route('/usuarios')
+def usuarios():
+    usuarios = usuario()
+    return render_template('usuarios.html', usuarios=usuarios)
+
+@app.route('/usuariosEdit', methods=['POST'])
+def usuariosEdit():
+    urlEdit = True
+    id = int(request.form.get("id"))
+    nome = request.form.get('nome')
+    cpf = request.form.get('cpf')
+    data_nascimento: int = int(request.form.get('data_nascimento').replace('-', ''))
+    imagem = request.files['image']
+    #o os com o app.config pega a onde esta setado no UPLOAD_FOLDER a pasta pra salvar a imagem temporariamente
+    caminho_imagem = os.path.join(app.config['UPLOAD_FOLDER'], imagem.filename)
+    imagem.save(caminho_imagem)
+    userEditado = editUser(id,nome, cpf, data_nascimento, caminho_imagem)
+    usuarios = usuario()
+    return render_template('usuarios.html', usuarios=usuarios, urlEdit=urlEdit, userEditado=userEditado)
 
 if __name__=='__main__':
     app.run(debug=True)

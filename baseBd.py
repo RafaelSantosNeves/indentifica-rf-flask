@@ -27,6 +27,24 @@ def cadastroUser(nome: str, cpf: str, data_nascimento: int, caminho_imagem):
     except:
         return False
 
+def editUser(id: int,nome: str, cpf: str, data_nascimento: int, caminho_imagem):
+    try:
+        # Codifica imagem em base 64
+        with open(caminho_imagem, "rb") as image_file:
+            encoded_string = base64.b64encode(image_file.read())
+        my_string = encoded_string.decode('utf-8')
+
+        # Insere o registro no banco de dados
+        comando = f'UPDATE alunos_cadastrados SET nome = "{nome}", cpf = "{cpf}", data_nascimento = "{data_nascimento}", foto_aluno = "{my_string}" WHERE id = {id}'
+        conectaBD(comando)
+
+        # Exclui arquivo da pasta UPLOAD_FOLDER
+        os.remove(caminho_imagem)
+
+        return True
+    except:
+        return False
+
 def presenca(data: int, id_aluno: int, presenca = 1):
     conexao = mysql.connector.connect(
         host='localhost',
